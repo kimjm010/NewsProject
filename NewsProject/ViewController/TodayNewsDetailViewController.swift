@@ -6,24 +6,32 @@
 //
 
 import UIKit
+import WebKit
 
 class TodayNewsDetailViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    
+    @IBOutlet weak var newsWebView: WKWebView!
+    
+    var target: NewsList.Article?
+    
+    
+    @IBAction func openInSafari(_ sender: Any) {
+        if let str = target?.url, let url = URL(string: str) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let str = target?.url, let url = URL(string: str) {
+            let request = URLRequest(url: url)
+            newsWebView.load(request)
+        }
+        
     }
-    */
-
+    
 }

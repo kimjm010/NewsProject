@@ -36,7 +36,6 @@ class TodayNewsTableViewCell: UITableViewCell {
         descriptionLabel.text = article.description
         publishedDateLabel.text = article.publishedAt
         
-        guard let image = UIImage(contentsOfFile: article.urlToImage) else { return }
-        newsImageView.image = image
+        newsImageView.image = UIImage(contentsOfFile: article.urlToImage)
     }
 }

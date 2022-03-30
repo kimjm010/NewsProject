@@ -1,0 +1,20 @@
+PODS:
+  - iOSDropDown (0.3.4)
+  - Loaf (0.7.0)
+
+DEPENDENCIES:
+  - iOSDropDown
+  - Loaf
+
+SPEC REPOS:
+  trunk:
+    - iOSDropDown
+    - Loaf
+
+SPEC CHECKSUMS:
+  iOSDropDown: c10a761f9a00c3f1cc9d3bce43ae504628e2f692
+  Loaf: d69937cd00649f3fa260beb8b7aef0a1feb861ef
+
+PODFILE CHECKSUM: b185699a0e0f391d2ecb5d2bd801d55c3a8d31f9
+
+COCOAPODS: 1.11.2

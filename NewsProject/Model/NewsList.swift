@@ -29,3 +29,7 @@ struct NewsList: Codable {
     
     let articles: [Article]
 }
+
+
+
+
