@@ -11,16 +11,11 @@ class TodayViewController: CommonViewController {
     
     @IBOutlet weak var newsListTableview: UITableView!
     
-    
+    /// NewsList.Article array whcih is filtered by the searched words.
     var filteredList = [NewsList.Article]()
     
-    lazy var updateTableView = {
-        DispatchQueue.main.async {
-            self.newsListTableview.reloadData()
-        }
-    }
-    
-    var target: NewsList.Article?
+    /// selectedArticle
+    var selectedArticle: NewsList.Article?
     
     /// to temporarily store the searched text
     var cachedText = ""
@@ -33,14 +28,10 @@ class TodayViewController: CommonViewController {
         return searchController.searchBar.text?.isEmpty ?? true
     }
     
-    
     /// Check whether filtering or not
     var isFiltering: Bool {
         return searchController.isActive && !isSearchBarEmpty
     }
-    
-    
-    
     
     
     /// send selected Data to TodayNewsDetailViewController
@@ -54,21 +45,29 @@ class TodayViewController: CommonViewController {
             }
         }
     }
-
     
     
+    /// called right after the view load to memory
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchNews {
+        // fetch NewsList
+        fetchNews(endPoint: "everything",
+                  country: country,
+                  keyWord: keyWord,
+                  category: category,
+                  language: language) {
             DispatchQueue.main.async {
                 self.newsListTableview.reloadData()
             }
         }
+        
+        // call searchController setup method
         setupSearchController()
     }
 
     
+    /// setup the searchController object
     func setupSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -78,9 +77,12 @@ class TodayViewController: CommonViewController {
     }
     
     
+    /// conduct search method and store the result to 'filteredList'
+    /// - Parameter searchText: text which user want to search it
     func filterContentForSearchText(_ searchText: String) {
         filteredList = list.filter { (article) -> Bool in
-            return article.content.lowercased().contains(searchText.lowercased())
+            guard let content = article.content else { return false }
+            return content.lowercased().contains(searchText.lowercased())
         }
         
         newsListTableview.reloadData()
@@ -124,7 +126,11 @@ extension TodayViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         guard indexPaths.contains(where: { $0.row >= list.count - 5 }) else { return }
         
-        fetchNews {
+        fetchNews(endPoint: "everything",
+                  country: country,
+                  keyWord: keyWord,
+                  category: category,
+                  language: language) {
             DispatchQueue.main.async {
                 self.newsListTableview.reloadData()
             }
@@ -139,7 +145,7 @@ extension TodayViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        target = list[indexPath.row]
+        selectedArticle = list[indexPath.row]
     }
 }
 

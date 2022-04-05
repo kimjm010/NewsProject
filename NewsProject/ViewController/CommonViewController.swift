@@ -23,17 +23,21 @@ class CommonViewController: UIViewController {
     var language = "en"
     
     func fetchNews(endPoint: String = "top-headlines",
-                   country: String = "us",
+                   country: String? = "us",
                    keyWord: String = "today",
-                   category: String = "business",
+                   category: String? = "business",
                    language: String = "en",
                    completion: (() -> ())? = nil) {
         guard hasMore && !isFetching else { return }
         
         page += 1
         isFetching = true
+        var urlStr = ""
+        if let country = country, let category = category {
+            urlStr = "https://newsapi.org/v2/\(endPoint)?country=\(country)&q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)&language=\(language) "
+        }
         
-        let urlStr = "https://newsapi.org/v2/\(endPoint)?country=\(country)&q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)&language=\(language)"
+        urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)&language=\(language) "
         
         guard let url = URL(string: urlStr) else { return }
         

@@ -20,13 +20,23 @@ class CovidViewController: CommonViewController {
     @IBAction func selectCountry(_ sender: Any) {
         guard let index = countryDropDown.selectedIndex else { return }
         selectedCountry = countryDropDown.optionArray[index]
+        
         fetchNews(endPoint: endPoint,
-                  country: selectedCountry ?? country,
-                  keyWord: keyWord,
-                  category: category,
+                  country: selectedCountry ?? nil,
+                  keyWord: "Covid",
+                  category: nil,
                   language: language) {
             DispatchQueue.main.async {
                 self.covidNewsListTableView.reloadData()
+            }
+        }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cell = sender as? UITableViewCell, let indexPath = covidNewsListTableView.indexPath(for: cell) {
+            if let vc = segue.destination as? CovidNewsDetailViewController {
+                vc.article = list[indexPath.row]
             }
         }
     }
@@ -37,14 +47,15 @@ class CovidViewController: CommonViewController {
         super.viewDidLoad()
         
         fetchNews(endPoint: endPoint,
-                  country: selectedCountry ?? country,
-                  keyWord: keyWord,
-                  category: category,
+                  country: nil,
+                  keyWord: "Covid",
+                  category: nil,
                   language: language) {
             DispatchQueue.main.async {
                 self.covidNewsListTableView.reloadData()
             }
         }
+        
 
         countryDropDown.optionArray = ["ae", "ar", "at", "au", "be", "bg", "us", "ru"]
         

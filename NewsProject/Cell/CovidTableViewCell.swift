@@ -8,7 +8,7 @@
 import UIKit
 
 class CovidTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var newsImageView: UIImageView!
@@ -22,6 +22,9 @@ class CovidTableViewCell: UITableViewCell {
         titleLabel.text = article.title
         descriptionLabel.text = article.description
         dateLabel.text = article.publishedAt
-        newsImageView.image = UIImage(contentsOfFile: article.urlToImage)
+        guard let urlToImageStr = article.urlToImage,
+              let imageUrl = URL(string: urlToImageStr),
+              let imageData = try? Data(contentsOf: imageUrl) else { return }
+        newsImageView.image = UIImage(data: imageData)
     }
 }

@@ -21,13 +21,7 @@ class TodayNewsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        
     }
 
     
@@ -36,6 +30,10 @@ class TodayNewsTableViewCell: UITableViewCell {
         descriptionLabel.text = article.description
         publishedDateLabel.text = article.publishedAt
         
-        newsImageView.image = UIImage(contentsOfFile: article.urlToImage)
+        guard let urlToImageStr = article.urlToImage,
+              let imageUrl = URL(string: urlToImageStr),
+              let imageData = try? Data(contentsOf: imageUrl) else { return }
+        newsImageView.image = UIImage(data: imageData)
+
     }
 }
