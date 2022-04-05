@@ -21,15 +21,18 @@ class CovidViewController: CommonViewController {
         guard let index = countryDropDown.selectedIndex else { return }
         selectedCountry = countryDropDown.optionArray[index]
         
-        fetchNews(endPoint: endPoint,
-                  country: selectedCountry ?? nil,
-                  keyWord: "Covid",
-                  category: nil,
-                  language: language) {
-            DispatchQueue.main.async {
-                self.covidNewsListTableView.reloadData()
+        DispatchQueue.global().async {
+            self.fetchNews(endPoint: self.endPoint,
+                           country: self.selectedCountry ?? nil,
+                           keyWord: "Covid",
+                           category: nil,
+                           language: self.language) {
+                DispatchQueue.main.async {
+                    self.covidNewsListTableView.reloadData()
+                }
             }
         }
+        
     }
     
     
@@ -46,17 +49,16 @@ class CovidViewController: CommonViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchNews(endPoint: endPoint,
-                  country: nil,
-                  keyWord: "Covid",
-                  category: nil,
-                  language: language) {
+        self.fetchNews(endPoint: self.endPoint,
+                       country: nil,
+                       keyWord: "Covid",
+                       category: nil,
+                       language: self.language) {
             DispatchQueue.main.async {
                 self.covidNewsListTableView.reloadData()
             }
         }
         
-
         countryDropDown.optionArray = ["ae", "ar", "at", "au", "be", "bg", "us", "ru"]
         
     }

@@ -12,11 +12,11 @@ class TodayNewsDetailViewController: UIViewController {
     
     @IBOutlet weak var newsWebView: WKWebView!
     
-    var target: NewsList.Article?
+    var article: ArticleEntity?
     
     
     @IBAction func openInSafari(_ sender: Any) {
-        if let str = target?.url, let url = URL(string: str) {
+        if let str = article?.url, let url = URL(string: str) {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
@@ -27,11 +27,11 @@ class TodayNewsDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let str = target?.url, let url = URL(string: str) {
+        print(#function, article?.title)
+        
+        if let str = article?.url, let url = URL(string: str) {
             let request = URLRequest(url: url)
             newsWebView.load(request)
         }
-        
     }
-    
 }

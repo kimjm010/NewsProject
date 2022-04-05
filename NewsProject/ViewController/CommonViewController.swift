@@ -34,10 +34,10 @@ class CommonViewController: UIViewController {
         isFetching = true
         var urlStr = ""
         if let country = country, let category = category {
-            urlStr = "https://newsapi.org/v2/\(endPoint)?country=\(country)&q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)&language=\(language) "
+            urlStr = "https://newsapi.org/v2/\(endPoint)?country=\(country)&q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)&language=\(language)"
         }
         
-        urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)&language=\(language) "
+        urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)&language=\(language)"
         
         guard let url = URL(string: urlStr) else { return }
         
@@ -63,10 +63,17 @@ class CommonViewController: UIViewController {
             
             do {
                 let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
                 let result = try decoder.decode(NewsList.self, from: data)
                 
-                self.list.append(contentsOf: result.articles)
                 self.hasMore = result.articles.count > 0
+                
+                if result.articles.count > 0 {
+                    DispatchQueue.main.async {
+                        DataManager.shared.addArticle(list: result.articles)
+                    }
+                }
+                
                 completion?()
             } catch {
                 self.hasMore = false

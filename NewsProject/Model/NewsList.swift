@@ -23,8 +23,9 @@ struct NewsList: Codable {
         let description: String
         let url: String
         let urlToImage: String?
-        let publishedAt: String
+        let publishedAt: Date
         let content: String?
+        var isMarked: Bool = false
     }
     
     let articles: [Article]

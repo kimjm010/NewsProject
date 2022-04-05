@@ -21,10 +21,15 @@ class CovidTableViewCell: UITableViewCell {
     func configure(article: NewsList.Article) {
         titleLabel.text = article.title
         descriptionLabel.text = article.description
-        dateLabel.text = article.publishedAt
-        guard let urlToImageStr = article.urlToImage,
-              let imageUrl = URL(string: urlToImageStr),
-              let imageData = try? Data(contentsOf: imageUrl) else { return }
-        newsImageView.image = UIImage(data: imageData)
+        dateLabel.text = article.publishedAt.dateToString
+        
+        DispatchQueue.global().async {
+            guard let urlToImageStr = article.urlToImage,
+                  let imageUrl = URL(string: urlToImageStr),
+                  let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.newsImageView.image = UIImage(data: imageData)
+            }
+        }
     }
 }
