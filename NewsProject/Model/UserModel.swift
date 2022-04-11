@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct user {
+struct User {
     let id: UUID
     let userName: String
     let userIsMarked: Bool
@@ -28,6 +28,8 @@ struct DisplaySettings {
     var systemTextSize: Bool
     var customTextSize: Double
 }
+
+
 
 //enum DisplaySettings: Int {
 //    case theme = 0

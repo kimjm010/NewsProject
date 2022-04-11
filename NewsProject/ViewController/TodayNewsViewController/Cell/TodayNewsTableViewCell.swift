@@ -19,30 +19,9 @@ class TodayNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var publishedDateLabel: UILabel!
     
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-
-    
-//    func configure(article: NewsList.Article) {
-//        titleLabel.text = article.title
-//        descriptionLabel.text = article.description
-//        publishedDateLabel.text = article.publishedAt.dateToString
-//
-//        DispatchQueue.global().async {
-//            guard let urlToImageStr = article.urlToImage,
-//                  let imageUrl = URL(string: urlToImageStr),
-//                  let imageData = try? Data(contentsOf: imageUrl) else { return }
-//            DispatchQueue.main.async {
-//                self.newsImageView.image = UIImage(data: imageData)
-//            }
-//        }
-//    }
-    
     func configure(article: ArticleEntity) {
         titleLabel.text = article.title
-        descriptionLabel.text = article.description
+        descriptionLabel.text = article.explanation
         guard let publishedDate = article.publishedAt else { return }
         publishedDateLabel.text = publishedDate.dateToString
         

@@ -22,3 +22,37 @@ class GeneralSettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 }
+
+
+
+extension GeneralSettingsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralSettingsTableViewCell") as! GeneralSettingsTableViewCell
+        
+        cell.settingLabel.text = ""
+        
+        return cell
+    }
+}
+
+
+
+
+
+extension GeneralSettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}

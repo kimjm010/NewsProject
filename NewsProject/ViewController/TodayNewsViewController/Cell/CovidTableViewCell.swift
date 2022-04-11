@@ -1,0 +1,36 @@
+//
+//  CovidTableViewCell.swift
+//  NewsProject
+//
+//  Created by Chris Kim on 2022/03/30.
+//
+
+import UIKit
+
+class CovidTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var newsImageView: UIImageView!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    
+    func configure(article: ArticleEntity) {
+        titleLabel.text = article.title
+        descriptionLabel.text = article.description
+        guard let publishedDate = article.publishedAt else { return }
+        dateLabel.text = publishedDate.dateToString
+        
+        DispatchQueue.global().async {
+            guard let urlToImageStr = article.urlToImage,
+                  let imageUrl = URL(string: urlToImageStr),
+                  let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.newsImageView.image = UIImage(data: imageData)
+            }
+        }
+    }
+}

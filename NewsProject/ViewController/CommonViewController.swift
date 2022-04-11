@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 class CommonViewController: UIViewController {
@@ -16,28 +17,25 @@ class CommonViewController: UIViewController {
     var hasMore = true
     var isFetching = false
     
-    var endPoint = "top-headlines"
-    var country = "us"
-    var keyWord = "today"
-    var category = "business"
-    var language = "en"
-    
-    func fetchNews(endPoint: String = "top-headlines",
-                   country: String? = "us",
-                   keyWord: String = "today",
-                   category: String? = "business",
-                   language: String = "en",
+    func fetchNews(endPoint: String,
+                   keyWord: String?,
+                   category: String?,
                    completion: (() -> ())? = nil) {
         guard hasMore && !isFetching else { return }
         
         page += 1
+        
         isFetching = true
+        
         var urlStr = ""
-        if let country = country, let category = category {
-            urlStr = "https://newsapi.org/v2/\(endPoint)?country=\(country)&q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)&language=\(language)"
+        
+        guard let category = category,
+              let keyWord = keyWord else {
+            urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)"
+            return
         }
         
-        urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)&language=\(language)"
+        urlStr = "https://newsapi.org/v2/\(endPoint)?apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)"
         
         guard let url = URL(string: urlStr) else { return }
         
@@ -83,4 +81,16 @@ class CommonViewController: UIViewController {
         
         task.resume()
     }
+    
+    
+    lazy var articleController: NSFetchedResultsController<ArticleEntity> = {
+        let controller = NSFetchedResultsController(fetchRequest: DataManager.shared.fetchRequest,
+                                                    managedObjectContext: DataManager.shared.mainContext,
+                                                    sectionNameKeyPath: nil,
+                                                    cacheName: nil)
+        
+        return controller
+    }()
 }
+
+

@@ -14,7 +14,7 @@ class CovidNewsDetailViewController: UIViewController {
     
     @IBOutlet weak var bookMarkBtn: UIBarButtonItem!
     
-    var article: NewsList.Article?
+    var article: ArticleEntity?
     
     var isMarked = false
     

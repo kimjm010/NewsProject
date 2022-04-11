@@ -12,6 +12,8 @@ class DataManager {
     static let shared = DataManager()
     private init() { }
     
+    let newsCategoryList = ["Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"]
+    
     var mainContext: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
@@ -60,16 +62,17 @@ class DataManager {
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "NewsDB")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
+        
         return container
     }()
 
     // MARK: - Core Data Saving support
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

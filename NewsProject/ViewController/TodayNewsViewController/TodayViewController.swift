@@ -14,8 +14,7 @@ class TodayViewController: CommonViewController {
     @IBOutlet weak var newsListTableview: UITableView!
     
     /// NewsList.Article array whcih is filtered by the searched words.
-    var filteredList = [NewsList.Article]()
-    var filteredList1 = [ArticleEntity]()
+    var filteredList = [ArticleEntity]()
     
     /// selectedArticle
     var selectedArticle: ArticleEntity?
@@ -37,23 +36,13 @@ class TodayViewController: CommonViewController {
     }
     
     
-    lazy var articleController: NSFetchedResultsController<ArticleEntity> = {
-        let controller = NSFetchedResultsController(fetchRequest: DataManager.shared.fetchRequest,
-                                                    managedObjectContext: DataManager.shared.mainContext,
-                                                    sectionNameKeyPath: nil,
-                                                    cacheName: nil)
-        controller.delegate = self
-        return controller
-    }()
-    
-    
     /// send selected Data to TodayNewsDetailViewController
     /// - Parameters:
     ///   - segue: called segue
     ///   - sender: object which trigger the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let indexPath = newsListTableview.indexPath(for: cell) {
-            if let vc = segue.destination.children.first as? TodayNewsDetailViewController {
+            if let vc = segue.destination.children.first as? NewsDetailViewController {
                 vc.article = articleController.object(at: indexPath)
             }
         }
@@ -64,12 +53,12 @@ class TodayViewController: CommonViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        articleController.delegate = self
+        
         // fetch NewsList
-        self.fetchNews(endPoint: "everything",
-                       country: self.country,
-                       keyWord: self.keyWord,
-                       category: self.category,
-                       language: self.language) {
+        fetchNews(endPoint: EndPoint.everything.rawValue,
+                  keyWord: "today",
+                  category: nil) {
             DispatchQueue.main.async {
                 self.newsListTableview.reloadData()
             }
@@ -101,7 +90,7 @@ class TodayViewController: CommonViewController {
     func filterContentForSearchText(_ searchText: String) {
         guard let articles = articleController.fetchedObjects else { return }
         
-        filteredList1 = articles.filter({ (article) -> Bool in
+        filteredList = articles.filter({ (article) -> Bool in
             guard let content = article.content else { return false }
             return content.lowercased().contains(searchText.lowercased())
         })
@@ -121,7 +110,7 @@ extension TodayViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            return filteredList1.count
+            return filteredList.count
         }
         
         guard let sectionInfo = articleController.sections else { return 0 }
@@ -136,15 +125,29 @@ extension TodayViewController: UITableViewDataSource {
         var article: ArticleEntity
         
         if isFiltering {
-            article = filteredList1[indexPath.row]
-//            article = filteredList[indexPath.row]
+            article = filteredList[indexPath.row]
         } else {
-//            article = list[indexPath.row]
             article = articleController.object(at: indexPath)
         }
         
         cell.configure(article: article)
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sectionInfo = articleController.sections else { return "" }
+        return sectionInfo[section].name
+    }
+    
+    
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return articleController.sectionIndexTitles
+    }
+    
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        let result = articleController.section(forSectionIndexTitle: title, at: index)
+        return result
     }
 }
 
@@ -158,11 +161,9 @@ extension TodayViewController: UITableViewDataSourcePrefetching {
         
         guard indexPaths.contains(where: { $0.row >= sectionInfo[$0.section].numberOfObjects - 5 }) else { return }
         
-        fetchNews(endPoint: "everything",
-                  country: country,
-                  keyWord: keyWord,
-                  category: category,
-                  language: language) {
+        fetchNews(endPoint: EndPoint.everything.rawValue,
+                  keyWord: "today",
+                  category: nil) {
             DispatchQueue.main.async {
                 self.newsListTableview.reloadData()
             }
@@ -213,7 +214,7 @@ extension TodayViewController: UISearchBarDelegate {
     /// called when the user end to edit the text wich will be searched
     /// - Parameter searchBar: searchBar which is editing
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        guard !(cachedText.isEmpty || filteredList1.isEmpty) else { return }
+        guard !(cachedText.isEmpty || filteredList.isEmpty) else { return }
         searchController.searchBar.text = cachedText
     }
     
