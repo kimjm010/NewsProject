@@ -19,6 +19,8 @@
 		F58E6A8B280002EE00701BDB /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E6A8A280002EE00701BDB /* NewsDetailViewController.swift */; };
 		F58E6A8D2800089B00701BDB /* NormalSectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E6A8C2800089B00701BDB /* NormalSectionsViewController.swift */; };
 		F58E6A8F280008E100701BDB /* NormalSectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58E6A8E280008E100701BDB /* NormalSectionTableViewCell.swift */; };
+		F5BD28472803E0D900935FDB /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD28462803E0D900935FDB /* UIViewController+Alert.swift */; };
+		F5BD2849280545CD00935FDB /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BD2848280545CD00935FDB /* NSNotification+Extension.swift */; };
 		F5C3AA6127F2EFD5001903D6 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3AA6027F2EFD5001903D6 /* TodayViewController.swift */; };
 		F5C3AA6327F2EFE4001903D6 /* CovidViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3AA6227F2EFE4001903D6 /* CovidViewController.swift */; };
 		F5C3AA6527F2EFED001903D6 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C3AA6427F2EFED001903D6 /* FavoriteViewController.swift */; };
@@ -33,7 +35,7 @@
 		F5C771AD27FC1A3B005B3C37 /* GeneralSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771AC27FC1A3B005B3C37 /* GeneralSettingsTableViewCell.swift */; };
 		F5C771B027FC1CB0005B3C37 /* NewsDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5C771AE27FC1CB0005B3C37 /* NewsDB.xcdatamodeld */; };
 		F5C771B327FC1DB0005B3C37 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771B227FC1DB0005B3C37 /* DataManager.swift */; };
-		F5C771B627FC2410005B3C37 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771B527FC2410005B3C37 /* Extension.swift */; };
+		F5C771B627FC2410005B3C37 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771B527FC2410005B3C37 /* Date+Formatter.swift */; };
 		F5D5F1A727F3408400CD96C7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D5F1A627F3408400CD96C7 /* UserModel.swift */; };
 		F663E5357F69CD98E0918FD0 /* Pods_NewsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1920F0BE3FAE6C6E3E6A128F /* Pods_NewsProject.framework */; };
 /* End PBXBuildFile section */
@@ -56,6 +58,8 @@
 		F58E6A8A280002EE00701BDB /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		F58E6A8C2800089B00701BDB /* NormalSectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalSectionsViewController.swift; sourceTree = "<group>"; };
 		F58E6A8E280008E100701BDB /* NormalSectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalSectionTableViewCell.swift; sourceTree = "<group>"; };
+		F5BD28462803E0D900935FDB /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		F5BD2848280545CD00935FDB /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		F5C3AA6027F2EFD5001903D6 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		F5C3AA6227F2EFE4001903D6 /* CovidViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CovidViewController.swift; sourceTree = "<group>"; };
 		F5C3AA6427F2EFED001903D6 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		F5C771AC27FC1A3B005B3C37 /* GeneralSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F5C771AF27FC1CB0005B3C37 /* NewsDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NewsDB.xcdatamodel; sourceTree = "<group>"; };
 		F5C771B227FC1DB0005B3C37 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		F5C771B527FC2410005B3C37 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		F5C771B527FC2410005B3C37 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		F5D5F1A627F3408400CD96C7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -248,7 +252,9 @@
 		F5C771B427FC2404005B3C37 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F5C771B527FC2410005B3C37 /* Extension.swift */,
+				F5C771B527FC2410005B3C37 /* Date+Formatter.swift */,
+				F5BD28462803E0D900935FDB /* UIViewController+Alert.swift */,
+				F5BD2848280545CD00935FDB /* NSNotification+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -371,6 +377,7 @@
 				F58E6A8B280002EE00701BDB /* NewsDetailViewController.swift in Sources */,
 				F5C3AA6327F2EFE4001903D6 /* CovidViewController.swift in Sources */,
 				F5C771B327FC1DB0005B3C37 /* DataManager.swift in Sources */,
+				F5BD28472803E0D900935FDB /* UIViewController+Alert.swift in Sources */,
 				F58E6A8F280008E100701BDB /* NormalSectionTableViewCell.swift in Sources */,
 				F5C66F4027FD7D7900FCF6DE /* SectionsCollectionViewCell.swift in Sources */,
 				F5C771AD27FC1A3B005B3C37 /* GeneralSettingsTableViewCell.swift in Sources */,
@@ -379,7 +386,7 @@
 				F5C771A927FC0F59005B3C37 /* AppInfoSettingsViewController.swift in Sources */,
 				F54BC48827F1A808000DB490 /* NewsList.swift in Sources */,
 				F5C3AA6527F2EFED001903D6 /* FavoriteViewController.swift in Sources */,
-				F5C771B627FC2410005B3C37 /* Extension.swift in Sources */,
+				F5C771B627FC2410005B3C37 /* Date+Formatter.swift in Sources */,
 				F5C3AA6B27F2F485001903D6 /* TodayNewsTableViewCell.swift in Sources */,
 				F5C66F3C27FD5EE400FCF6DE /* SectionsTableViewCell.swift in Sources */,
 				F5C3AA6127F2EFD5001903D6 /* TodayViewController.swift in Sources */,
@@ -393,6 +400,7 @@
 				F5C771A727FC0F38005B3C37 /* DisplaySettingsViewController.swift in Sources */,
 				F54A43F327F44513002B41DE /* CommonViewController.swift in Sources */,
 				F5D5F1A727F3408400CD96C7 /* UserModel.swift in Sources */,
+				F5BD2849280545CD00935FDB /* NSNotification+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

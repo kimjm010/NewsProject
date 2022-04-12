@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppInfoSettingsViewController: UIViewController {
+class AppInfoSettingsViewController: CommonViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

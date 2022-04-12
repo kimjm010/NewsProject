@@ -12,6 +12,7 @@ struct User {
     let id: UUID
     let userName: String
     let userIsMarked: Bool
+    let userNoti: Date
 }
 
 
@@ -22,19 +23,12 @@ enum PushNotiSettings: Int {
 }
 
 
+let generalSettingLists = ["Push Notification Settings", "DisplaySetting"]
 
-struct DisplaySettings {
-    var theme: Bool
-    var systemTextSize: Bool
-    var customTextSize: Double
-}
+//["Log Out", "About This App"]
 
 
 
-//enum DisplaySettings: Int {
-//    case theme = 0
-//    case systemTextSize = 1
-//    case customTextSize = 2
-//}
+
 
 
