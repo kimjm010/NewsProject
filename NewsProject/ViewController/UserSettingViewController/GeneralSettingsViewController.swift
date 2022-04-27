@@ -9,15 +9,10 @@ import UIKit
 
 class GeneralSettingsViewController: CommonViewController {
     
+    var userEmail: String?
+    
     @IBAction func closeVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-    
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
     }
 }
 

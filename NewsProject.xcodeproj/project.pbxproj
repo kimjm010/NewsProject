@@ -41,6 +41,7 @@
 		F5EF5816281226EF00526088 /* SelectTimeIntervalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF5815281226EF00526088 /* SelectTimeIntervalTableViewController.swift */; };
 		F5EF58182813022300526088 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF58172813022300526088 /* UserDataManager.swift */; };
 		F5EF581A281318EF00526088 /* CommonDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF5819281318EF00526088 /* CommonDataManager.swift */; };
+		F5EF581C281904BB00526088 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF581B281904BB00526088 /* LoginViewController.swift */; };
 		F663E5357F69CD98E0918FD0 /* Pods_NewsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1920F0BE3FAE6C6E3E6A128F /* Pods_NewsProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,7 @@
 		F5EF5815281226EF00526088 /* SelectTimeIntervalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeIntervalTableViewController.swift; sourceTree = "<group>"; };
 		F5EF58172813022300526088 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		F5EF5819281318EF00526088 /* CommonDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataManager.swift; sourceTree = "<group>"; };
+		F5EF581B281904BB00526088 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 		F5C3AA6827F2F04E001903D6 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F5EF581B281904BB00526088 /* LoginViewController.swift */,
 				F54A43F227F44513002B41DE /* CommonViewController.swift */,
 				F5C771A327FC0EBA005B3C37 /* UserSettingViewController */,
 				F510192727F6C66D009AEB2B /* TodayNewsViewController */,
@@ -406,6 +409,7 @@
 				F54BC47327F1A55D000DB490 /* AppDelegate.swift in Sources */,
 				F527343B27F59FE000EEA296 /* CovidNewsDetailViewController.swift in Sources */,
 				F5C771A927FC0F59005B3C37 /* AppInfoSettingsViewController.swift in Sources */,
+				F5EF581C281904BB00526088 /* LoginViewController.swift in Sources */,
 				F54BC48827F1A808000DB490 /* NewsList.swift in Sources */,
 				F5C3AA6527F2EFED001903D6 /* FavoriteViewController.swift in Sources */,
 				F5C771B627FC2410005B3C37 /* Date+Formatter.swift in Sources */,

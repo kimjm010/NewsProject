@@ -1294,6 +1294,50 @@
             </objects>
             <point key="canvasLocation" x="6128" y="-1270"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="dHE-tS-gRB">
+            <objects>
+                <viewController id="cjb-Hn-AX3" customClass="LoginViewController" customModule="NewsProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zxl-Hq-0dF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rqH-tn-NIf">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BWv-w1-aoh">
+                                        <rect key="frame" x="20" y="373" width="374" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="zI1-YW-QOU"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondaryLabelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="BWv-w1-aoh" secondAttribute="trailing" constant="20" id="2yt-2l-nFB"/>
+                                    <constraint firstItem="BWv-w1-aoh" firstAttribute="centerX" secondItem="rqH-tn-NIf" secondAttribute="centerX" id="a1b-0J-uLH"/>
+                                    <constraint firstItem="BWv-w1-aoh" firstAttribute="centerY" secondItem="rqH-tn-NIf" secondAttribute="centerY" id="wei-rL-52m"/>
+                                    <constraint firstItem="BWv-w1-aoh" firstAttribute="leading" secondItem="rqH-tn-NIf" secondAttribute="leading" constant="20" id="wv6-jv-QVJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MnP-of-DqE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="rqH-tn-NIf" firstAttribute="top" secondItem="zxl-Hq-0dF" secondAttribute="top" id="3CC-wO-Slh"/>
+                            <constraint firstItem="rqH-tn-NIf" firstAttribute="trailing" secondItem="MnP-of-DqE" secondAttribute="trailing" id="5m5-ik-IN3"/>
+                            <constraint firstAttribute="bottom" secondItem="rqH-tn-NIf" secondAttribute="bottom" id="IfS-iM-87i"/>
+                            <constraint firstItem="rqH-tn-NIf" firstAttribute="leading" secondItem="MnP-of-DqE" secondAttribute="leading" id="Q8M-2Y-aLI"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="loginProviderStackView" destination="BWv-w1-aoh" id="UbR-L9-ZqK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wS0-zI-rhh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1391.304347826087" y="138.61607142857142"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="3jv-aX-d5h">
             <objects>
