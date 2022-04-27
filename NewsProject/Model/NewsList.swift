@@ -36,6 +36,3 @@ enum EndPoint: String, CaseIterable {
     case topHeadlines = "top-headlines"
 }
 
-
-
-

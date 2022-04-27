@@ -8,8 +8,6 @@
 import UIKit
 
 class GeneralSettingsViewController: CommonViewController {
-
-    var user: User?
     
     @IBAction func closeVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -48,7 +46,10 @@ extension GeneralSettingsViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.settingLabel.text = user?.userName
+            cell.settingLabel.text = usertemp.name
+            // TODO: user 이용해서 isMarked 구현하기
+            // TODO: Push Notification 정리 및 구현하기
+            
         case 1:
             cell.settingLabel.text = generalSettingLists[indexPath.row]
             cell.accessoryType = .disclosureIndicator

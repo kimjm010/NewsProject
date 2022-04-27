@@ -19,7 +19,7 @@ class SectionsViewController: CommonViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let indexPath = categoryNewsListTableView.indexPath(for: cell) {
             if let vc = segue.destination.children.first as? NormalSectionsViewController {
-                vc.selectedCategory = DataManager.shared.newsCategoryList[indexPath.row]
+                vc.selectedCategory = CommonDataManager.shared.newsCategoryList[indexPath.row]
             }
             if let vc = segue.destination.children.first as? NewsDetailViewController {
                 vc.article = articleController.object(at: indexPath)
@@ -40,10 +40,6 @@ class SectionsViewController: CommonViewController {
                 self.categoryNewsListTableView.reloadData()
             }
         }
-        
-        
-        // TODO: CoreData 공부하기
-        // TODO: CollectionView prefetch 공부하기
         
         do {
             try articleController.performFetch()
@@ -69,22 +65,24 @@ extension SectionsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return DataManager.shared.newsCategoryList.count
+        return CommonDataManager.shared.newsCategoryList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        print(indexPath.section, indexPath.row)
+        
         if indexPath.row == 0 || indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SectionsTableViewCell") as! SectionsTableViewCell
             let article = articleController.object(at: indexPath)
-            cell.categoryTitleLabel.text = DataManager.shared.newsCategoryList[indexPath.row]
+            cell.categoryTitleLabel.text = CommonDataManager.shared.newsCategoryList[indexPath.row]
             cell.configure(article: article)
             
             return cell
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCategoryCell")
-        let categoryData = DataManager.shared.newsCategoryList
+        let categoryData = CommonDataManager.shared.newsCategoryList
         cell?.textLabel?.text = categoryData[indexPath.row]
         
         
@@ -132,8 +130,8 @@ extension SectionsViewController: UITableViewDataSourcePrefetching {
         
         guard indexPaths.contains(where: { $0.row >= sectionInfo[$0.section].numberOfObjects - 5 }) else { return }
         
-        for category in 0..<DataManager.shared.newsCategoryList.count {
-            let categoryList = DataManager.shared.newsCategoryList
+        for category in 0..<CommonDataManager.shared.newsCategoryList.count {
+            let categoryList = CommonDataManager.shared.newsCategoryList
             fetchNews(endPoint: EndPoint.topHeadlines.rawValue,
                       keyWord: nil,
                       category: categoryList[category]) {

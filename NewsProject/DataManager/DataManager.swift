@@ -8,16 +8,9 @@
 import Foundation
 import CoreData
 
-class DataManager {
-    static let shared = DataManager()
-    private init() { }
-    
-    let newsCategoryList = ["Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"]
-    
-    var mainContext: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
-    
+
+
+extension CommonDataManager {
     
     func addArticle(list: [NewsList.Article]) {
         for article in list {
@@ -25,18 +18,6 @@ class DataManager {
         }
         
         saveContext()
-    }
-    
-    
-    var fetchRequest: NSFetchRequest<ArticleEntity> {
-        let request = ArticleEntity.fetchRequest()
-        
-        let sortByDateDesc = NSSortDescriptor(key: "publishedAt", ascending: false)
-        let sortByTitle = NSSortDescriptor(key: "title", ascending: true)
-        
-        request.sortDescriptors = [sortByDateDesc, sortByTitle]
-        request.fetchBatchSize = 10
-        return request
     }
     
     
@@ -56,31 +37,5 @@ class DataManager {
         newArticle.urlToImage = article.urlToImage
         newArticle.publishedAt = article.publishedAt
         newArticle.content = article.content
-    }
-    
-    
-    // MARK: - Core Data stack
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "NewsDB")
-        container.loadPersistentStores { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        
-        return container
-    }()
-
-    // MARK: - Core Data Saving support
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
     }
 }

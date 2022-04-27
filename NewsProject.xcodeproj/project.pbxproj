@@ -37,6 +37,10 @@
 		F5C771B327FC1DB0005B3C37 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771B227FC1DB0005B3C37 /* DataManager.swift */; };
 		F5C771B627FC2410005B3C37 /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C771B527FC2410005B3C37 /* Date+Formatter.swift */; };
 		F5D5F1A727F3408400CD96C7 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D5F1A627F3408400CD96C7 /* UserModel.swift */; };
+		F5E0F177280ABF3700EB332E /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E0F176280ABF3700EB332E /* NotificationManager.swift */; };
+		F5EF5816281226EF00526088 /* SelectTimeIntervalTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF5815281226EF00526088 /* SelectTimeIntervalTableViewController.swift */; };
+		F5EF58182813022300526088 /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF58172813022300526088 /* UserDataManager.swift */; };
+		F5EF581A281318EF00526088 /* CommonDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF5819281318EF00526088 /* CommonDataManager.swift */; };
 		F663E5357F69CD98E0918FD0 /* Pods_NewsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1920F0BE3FAE6C6E3E6A128F /* Pods_NewsProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +80,10 @@
 		F5C771B227FC1DB0005B3C37 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F5C771B527FC2410005B3C37 /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		F5D5F1A627F3408400CD96C7 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F5E0F176280ABF3700EB332E /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		F5EF5815281226EF00526088 /* SelectTimeIntervalTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeIntervalTableViewController.swift; sourceTree = "<group>"; };
+		F5EF58172813022300526088 /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		F5EF5819281318EF00526088 /* CommonDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +174,7 @@
 		F54BC47127F1A55D000DB490 /* NewsProject */ = {
 			isa = PBXGroup;
 			children = (
+				F5E0F175280ABF2300EB332E /* NotificationManager */,
 				F5C771B427FC2404005B3C37 /* Extension */,
 				F5C771B127FC1D9F005B3C37 /* DataManager */,
 				F5C3AA6827F2F04E001903D6 /* ViewController */,
@@ -234,6 +243,7 @@
 			children = (
 				F5C771AA27FC19CC005B3C37 /* GeneralSettingsViewController.swift */,
 				F5C771A427FC0EDB005B3C37 /* PushNotificationSettingsViewController.swift */,
+				F5EF5815281226EF00526088 /* SelectTimeIntervalTableViewController.swift */,
 				F5C771A627FC0F38005B3C37 /* DisplaySettingsViewController.swift */,
 				F5C771A827FC0F59005B3C37 /* AppInfoSettingsViewController.swift */,
 				F5C66F3727FD591400FCF6DE /* Cell */,
@@ -244,7 +254,9 @@
 		F5C771B127FC1D9F005B3C37 /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				F5EF5819281318EF00526088 /* CommonDataManager.swift */,
 				F5C771B227FC1DB0005B3C37 /* DataManager.swift */,
+				F5EF58172813022300526088 /* UserDataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -257,6 +269,14 @@
 				F5BD2848280545CD00935FDB /* NSNotification+Extension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		F5E0F175280ABF2300EB332E /* NotificationManager */ = {
+			isa = PBXGroup;
+			children = (
+				F5E0F176280ABF3700EB332E /* NotificationManager.swift */,
+			);
+			path = NotificationManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,6 +395,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58E6A8B280002EE00701BDB /* NewsDetailViewController.swift in Sources */,
+				F5EF5816281226EF00526088 /* SelectTimeIntervalTableViewController.swift in Sources */,
+				F5EF58182813022300526088 /* UserDataManager.swift in Sources */,
 				F5C3AA6327F2EFE4001903D6 /* CovidViewController.swift in Sources */,
 				F5C771B327FC1DB0005B3C37 /* DataManager.swift in Sources */,
 				F5BD28472803E0D900935FDB /* UIViewController+Alert.swift in Sources */,
@@ -392,6 +414,7 @@
 				F5C3AA6127F2EFD5001903D6 /* TodayViewController.swift in Sources */,
 				F5C771AB27FC19CC005B3C37 /* GeneralSettingsViewController.swift in Sources */,
 				F5C771A527FC0EDB005B3C37 /* PushNotificationSettingsViewController.swift in Sources */,
+				F5E0F177280ABF3700EB332E /* NotificationManager.swift in Sources */,
 				F5C771B027FC1CB0005B3C37 /* NewsDB.xcdatamodeld in Sources */,
 				F58E6A8D2800089B00701BDB /* NormalSectionsViewController.swift in Sources */,
 				F54BC47527F1A55D000DB490 /* SceneDelegate.swift in Sources */,
@@ -401,6 +424,7 @@
 				F54A43F327F44513002B41DE /* CommonViewController.swift in Sources */,
 				F5D5F1A727F3408400CD96C7 /* UserModel.swift in Sources */,
 				F5BD2849280545CD00935FDB /* NSNotification+Extension.swift in Sources */,
+				F5EF581A281318EF00526088 /* CommonDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +582,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -587,6 +612,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

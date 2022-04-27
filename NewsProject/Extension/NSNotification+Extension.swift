@@ -13,4 +13,8 @@ extension NSNotification.Name {
     static let setDarktMode = NSNotification.Name(rawValue: "setDarktMode")
     
     static let initialSettingDisplayMode = NSNotification.Name(rawValue: "initialSettingDisplayMode")
+    
+    static let sendIsMarkedNews = NSNotification.Name(rawValue: "sendIsMarkedNews")
+    
+    static let sendSelectedTimeInterval = NSNotification.Name(rawValue: "sendSelectedTimeInterval")
 }

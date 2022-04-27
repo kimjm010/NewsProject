@@ -12,9 +12,16 @@ import CoreData
 
 class CommonViewController: UIViewController {
     
+    var usertemp = UserEntity(context: CommonDataManager.shared.mainContext)
+    
+    var tokens = [NSObjectProtocol]()
+    
     var list = [NewsList.Article]()
+    
     var page = 0
+    
     var hasMore = true
+    
     var isFetching = false
     
     func fetchNews(endPoint: String,
@@ -29,13 +36,11 @@ class CommonViewController: UIViewController {
         
         var urlStr = ""
         
-        guard let category = category,
-              let keyWord = keyWord else {
+        if let category = category {
+            urlStr = "https://newsapi.org/v2/\(endPoint)?apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)"
+        } else if let keyWord = keyWord {
             urlStr = "https://newsapi.org/v2/\(endPoint)?q=\(keyWord)&apiKey=741b9390ed4f4c189c0e0a45378e9db1&page=\(page)"
-            return
         }
-        
-        urlStr = "https://newsapi.org/v2/\(endPoint)?apiKey=741b9390ed4f4c189c0e0a45378e9db1&category=\(category)&page=\(page)"
         
         guard let url = URL(string: urlStr) else { return }
         
@@ -68,7 +73,8 @@ class CommonViewController: UIViewController {
                 
                 if result.articles.count > 0 {
                     DispatchQueue.main.async {
-                        DataManager.shared.addArticle(list: result.articles)
+                        CommonDataManager.shared.addArticle(list: result.articles)
+                        
                     }
                 }
                 
@@ -84,13 +90,24 @@ class CommonViewController: UIViewController {
     
     
     lazy var articleController: NSFetchedResultsController<ArticleEntity> = {
-        let controller = NSFetchedResultsController(fetchRequest: DataManager.shared.fetchRequest,
-                                                    managedObjectContext: DataManager.shared.mainContext,
+        let controller = NSFetchedResultsController(fetchRequest: CommonDataManager.shared.fetchRequestArticleEntity,
+                                                    managedObjectContext: CommonDataManager.shared.mainContext,
                                                     sectionNameKeyPath: nil,
                                                     cacheName: nil)
         
         return controller
     }()
+    
+    
+    
+    override func viewDidLoad() {
+        
+        for token in tokens {
+            NotificationCenter.default.removeObserver(token)
+        }
+        
+        
+    }
 }
 
 

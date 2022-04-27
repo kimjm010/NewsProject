@@ -11,13 +11,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
+    var token: NSObjectProtocol?
     
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
         
-        NotificationCenter.default.addObserver(forName: .setDarktMode,
+        token = NotificationCenter.default.addObserver(forName: .setDarktMode,
                                                object: nil,
                                                queue: .main) { [weak self] (noti) in
             guard let self = self else { return }
@@ -54,6 +55,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    deinit {
+        if let token = token {
+            NotificationCenter.default.removeObserver(token)
+        }
+    }
 
 }
 
