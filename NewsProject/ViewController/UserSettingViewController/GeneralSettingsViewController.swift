@@ -9,10 +9,15 @@ import UIKit
 
 class GeneralSettingsViewController: CommonViewController {
     
-    var userEmail: String?
     
     @IBAction func closeVC(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
     }
 }
 
@@ -41,17 +46,18 @@ extension GeneralSettingsViewController: UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            cell.settingLabel.text = usertemp.name
+            cell.textLabel?.text = "여기에 계정 닉네임을 표시하자"
             // TODO: user 이용해서 isMarked 구현하기
             // TODO: Push Notification 정리 및 구현하기
+            break
             
         case 1:
-            cell.settingLabel.text = generalSettingLists[indexPath.row]
+            cell.textLabel?.text = generalSettingLists[indexPath.row]
             cell.accessoryType = .disclosureIndicator
         case 2:
-            cell.settingLabel.text = "Log Out"
+            cell.textLabel?.text = "Log Out"
         case 3:
-            cell.settingLabel.text = "About This App"
+            cell.textLabel?.text = "About This App"
             cell.accessoryType = .disclosureIndicator
         default:
             break

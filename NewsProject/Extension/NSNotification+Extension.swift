@@ -17,4 +17,6 @@ extension NSNotification.Name {
     static let sendIsMarkedNews = NSNotification.Name(rawValue: "sendIsMarkedNews")
     
     static let sendSelectedTimeInterval = NSNotification.Name(rawValue: "sendSelectedTimeInterval")
+    
+    static let sendUserName = NSNotification.Name(rawValue: "sendUserName")
 }

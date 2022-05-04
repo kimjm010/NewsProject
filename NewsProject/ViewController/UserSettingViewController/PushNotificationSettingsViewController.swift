@@ -38,11 +38,29 @@ class PushNotificationSettingsViewController: CommonViewController {
     
     var selectedTimeInterval: Double?
     
+    var selectedReminderType: Int?
+    
     var isRepeats: Bool = false
     
-    
     @IBAction func saveNotification(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        guard let selectedTimeInterval = selectedTimeInterval else { return }
+
+        NotificationManager.shared.scheduleNoti(id: signinUser?.name ?? "옵셔널 체이닝 제대로 안됬다 확인하자",
+                                                reminderType: selectedReminderType ?? 0,
+                                                timeInterval: selectedTimeInterval * 60,
+                                                date: nil,
+                                                latitude: nil,
+                                                longitude: nil,
+                                                radius: nil,
+                                                isReminder: repeatSwitch.isOn) {
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        }
+        
+        
+        
     }
     
     
@@ -59,27 +77,7 @@ class PushNotificationSettingsViewController: CommonViewController {
             timeIntervalView.isHidden = false
             dateView.isHidden = true
             locationView.isHidden = dateView.isHidden
-            
-            guard let selectedTimeInterval = selectedTimeInterval,
-                  let userId = usertemp.name else { return }
-            let currentIndex = Int16(currentIndex)
-            
-            CommonDataManager.shared.updateTimeIntervalReminder(user: usertemp,
-                                                                reminderType: currentIndex,
-                                                                timeInterval: selectedTimeInterval) { [weak self] in
-                guard let self = self else { return }
-                NotificationManager.shared.scheduleNoti(id: userId,
-                                                        reminderType: currentIndex,
-                                                        timeInterval: selectedTimeInterval,
-                                                        date: nil,
-                                                        latitude: nil,
-                                                        longitude: nil,
-                                                        radius: nil,
-                                                        repeats: self.isRepeats) {
-                    
-                }
-            }
-            
+        
             #if DEBUG
             print(currentIndex)
             #endif
@@ -116,7 +114,6 @@ class PushNotificationSettingsViewController: CommonViewController {
         super.viewDidLoad()
         
         initialSetting()
-//        CommonDataManager.shared.fetchUser()
         
         let token = NotificationCenter.default.addObserver(forName: .sendSelectedTimeInterval,
                                                        object: nil,

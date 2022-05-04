@@ -11,7 +11,9 @@ class DisplaySettingsViewController: CommonViewController {
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
-    @IBOutlet weak var systemTextSize: UISwitch!
+    @IBOutlet weak var adjustTextSizeButton: UIButton!
+    
+    var fontSize: CGFloat?
     
     
     @IBAction func toggleDarkModeSwitch(_ sender: Any) {
@@ -21,15 +23,20 @@ class DisplaySettingsViewController: CommonViewController {
     }
     
     
-    @IBAction func toggleSystemTextSizeSwitch(_ sender: Any) {
-        UserDefaults.standard.set(systemTextSize.isOn, forKey: "systemTextSize")
+    @IBAction func goSetting(_ sender: Any) {
+        let urlStr = UIApplication.openSettingsURLString
+        guard let url = URL(string: urlStr) else { return }
+        
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        adjustTextSizeButton.setTitle("", for: .normal)
         darkModeSwitch.isOn = UserDefaults.standard.bool(forKey: "darkModeSwitch")
-        systemTextSize.isOn = UserDefaults.standard.bool(forKey: "systemTextSize")
     }
 }

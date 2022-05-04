@@ -10,7 +10,6 @@ import CoreData
 
 // TODO: User CoreData 셋업하기
 // TODO: userNotification 등록하기
-// TODO: Apple 로그인 구현하기
 // TODO: textSize 조정하기
 
 
@@ -22,7 +21,9 @@ class CommonDataManager {
     
     let newsCategoryList = ["Business", "Entertainment", "General", "Health", "Science", "Sports", "Technology"]
     
-    var user = [UserEntity]()
+    var markedNewsList = [ArticleEntity]()
+    
+    var newsList = [ArticleEntity]()
     
     var mainContext: NSManagedObjectContext {
         return persistentContainer.viewContext
@@ -39,11 +40,11 @@ class CommonDataManager {
         return request
     }
     
-    var fetchRequestUserEntity: NSFetchRequest<UserEntity> {
-        let request = UserEntity.fetchRequest()
-        
-        return request
-    }
+//    var fetchRequestUserEntity: NSFetchRequest<UserEntity> {
+//        let request = UserEntity.fetchRequest()
+//
+//        return request
+//    }
     
     
     // MARK: - Core Data stack

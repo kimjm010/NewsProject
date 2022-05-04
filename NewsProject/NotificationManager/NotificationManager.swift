@@ -40,13 +40,13 @@ class NotificationManager {
     
     
     func scheduleNoti(id: String,
-                      reminderType: Int16,
+                      reminderType: Int,
                       timeInterval: TimeInterval? = nil,
                       date: Date? = nil,
                       latitude: Double? = nil,
                       longitude: Double? = nil,
                       radius: Double? = nil,
-                      repeats: Bool = false,
+                      isReminder: Bool = false,
                       completion: (() -> ())? = nil) {
         let content = UNMutableNotificationContent()
         content.title = "NewsProject"
@@ -57,13 +57,15 @@ class NotificationManager {
         switch reminderType {
         case 0:
             guard let timeInterval = timeInterval else { return }
+            
 
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: repeats)
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: isReminder)
+            print(#function, "등록되었습니다.")
         case 1:
             guard let date = date else { return }
             
             let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
-            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: repeats)
+            trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isReminder)
         case 2:
             guard let latitude = latitude,
                   let longitude = longitude,
@@ -71,7 +73,7 @@ class NotificationManager {
 
             let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let region = CLCircularRegion(center: center, radius: radius, identifier: id)
-            trigger = UNLocationNotificationTrigger(region: region, repeats: repeats)
+            trigger = UNLocationNotificationTrigger(region: region, repeats: isReminder)
         default:
             break
         }
@@ -87,17 +89,28 @@ class NotificationManager {
     }
     
     
-    func scheduleNotification(user: UserModel, repeats: Bool) {
+    func scheduleNotification(user: User, repeats: Bool) {
         let content = UNMutableNotificationContent()
         content.title = "NewsProject wants to Alert you"
         content.body = "Please check the notification"
         
-        var trigger: UNNotificationTrigger?
         
+        
+        var trigger: UNNotificationTrigger?
         switch user.reminderType {
-        case 1:
-            trigger = UNTimeIntervalNotificationTrigger(timeInterval: user.timeInterval, repeats: user.repeats)
-            break
+        case .timeInterval:
+            guard let timeInterval = user.timeInterval else { return }
+            trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval , repeats: user.isReminder)
+        case .calendar:
+            guard let date = user.date else { return }
+            trigger = UNCalendarNotificationTrigger(dateMatching: Calendar.current.dateComponents([.month, .day, .year, .hour, .minute], from: date), repeats: user.isReminder)
+        case .location:
+            guard let lat = user.lat,
+                  let lon = user.lon,
+                  let radius = user.radius else { return }
+            let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+            let region = CLCircularRegion(center: center, radius: radius, identifier: user.name)
+            trigger = UNLocationNotificationTrigger(region: region, repeats: user.isReminder)
         default:
             break
         }
@@ -118,7 +131,7 @@ class NotificationManager {
     
     
     
-    func removeScheduleNotification(user: UserModel) {
+    func removeScheduleNotification(user: User) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [user.name])
     }
     

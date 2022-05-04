@@ -34,9 +34,20 @@ class NewsDetailViewController: CommonViewController {
     
     
     @IBAction func toggleIsMarked(_ sender: Any) {
+        guard let article = article else { return }
+
         isSelected = isSelected ? false : true
+        article.isMarked = isSelected
         isMarkedBtn.image = isSelected ? UIImage(systemName: "bookmark.fill") : UIImage(systemName: "bookmark")
-        usertemp.userIsMarked = isSelected ? true : false
+        
+        // TODO: id지정해서 해당 위치에서 article 삭제할 것!!
+        if isSelected {
+            CommonDataManager.shared.markedNewsList.append(article)
+            print(CommonDataManager.shared.markedNewsList.count)
+        } else {
+            CommonDataManager.shared.markedNewsList.removeLast()
+            print(CommonDataManager.shared.markedNewsList.count)
+        }
         
         NotificationCenter.default.post(name: .sendIsMarkedNews, object: nil)
     }
@@ -45,7 +56,8 @@ class NewsDetailViewController: CommonViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        guard let newsStr = article?.url, let newsUrl = URL(string: newsStr) else { return }
+        guard let newsStr = article?.url,
+                let newsUrl = URL(string: newsStr) else { return }
         let request = URLRequest(url: newsUrl)
         webView.load(request)
     }

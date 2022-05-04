@@ -9,10 +9,15 @@ import UIKit
 import AuthenticationServices
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: CommonViewController {
 
     @IBOutlet weak var loginProviderStackView: UIStackView!
     
+    @IBOutlet weak var enterWithoutLoginButton: UIButton!
+    
+    @IBAction func enterWithoutLogin(_ sender: Any) {
+        transitionToMainVC()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +32,8 @@ class LoginViewController: UIViewController {
     
     
     func setupProviderLoginView() {
-        let authorizationButton = ASAuthorizationAppleIDButton()
+        let authorizationButton = ASAuthorizationAppleIDButton(type: .signIn, style: .whiteOutline)
         authorizationButton.addTarget(self, action: #selector(handleAuthorizationAppleIDButtonPress), for: .touchUpInside)
-        
         self.loginProviderStackView.addArrangedSubview(authorizationButton)
     }
     
@@ -65,24 +69,31 @@ class LoginViewController: UIViewController {
 extension LoginViewController: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
+        var userNumber = 0
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
             let fullName = appleIDCredential.fullName
             let email = appleIDCredential.email
             
-            // TODO: keychain에 저장코드 구현하기
+            self.saveUserInKeychain(userIdentifier)
             
-            self.showMainViewController(userIdentifier: userIdentifier, fullName: fullName, email: email)
+            transitionToMainVC()
+            print("User ID: \(userIdentifier)")
+            print("User Full Name: \(fullName?.givenName ?? "") + \(fullName?.familyName ?? "")")
+            print("User Email: \(email ?? "")")
             
-        case let passwordCredential as ASPasswordCredential:
+            userNumber += 1
             
-            let userName = passwordCredential.user
-            let password = passwordCredential.password
-            
-            DispatchQueue.main.async {
-                self.showMainViewController(userName: userName, password: password)
-            }
+            var user = User(name: "user \(userNumber)",
+                            timeInterval: nil,
+                            date: nil,
+                            lat: nil,
+                            lon: nil,
+                            radius: nil)
+            let userInfo = ["user": user]
+            NotificationCenter.default.post(name: .sendUserName, object: nil, userInfo: userInfo)
             
         default:
             break
@@ -91,34 +102,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     
     
     private func saveUserInKeychain(_ userIdentifier: String) {
-        // TODO: KeyChain 저장 구현하
-//        do {
-//            try
-//        } catch {
-//            print(error.localizedDescription, "Unable to save userIdentifier to Keychain.")
-//        }
-    }
-    
-    
-    private func showMainViewController(userIdentifier: String, fullName: PersonNameComponents?, email: String?) {
-        guard let vc = self.presentingViewController as? GeneralSettingsViewController else { return }
-        
-        DispatchQueue.main.async {
-            vc.userEmail = email
+        do {
+            try KeychainItem(service: "com.example.apple", account: "userIdentifier").saveItem(userIdentifier)
+        } catch {
+            print("Unable to save userIdentifier to keychain.")
         }
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    private func showMainViewController(userName: String, password: String) {
-        guard let vc = self.presentingViewController as? GeneralSettingsViewController else { return }
-        
-        DispatchQueue.main.async {
-            vc.userEmail = userName
-        }
-        
-        dismiss(animated: true, completion: nil)
     }
     
     
@@ -153,5 +141,11 @@ extension UIViewController {
             loginViewController.isModalInPresentation = true
             self.present(loginViewController, animated: true, completion: nil)
         }
+    }
+    
+    func showMainVC() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mainVC = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(mainVC)
     }
 }

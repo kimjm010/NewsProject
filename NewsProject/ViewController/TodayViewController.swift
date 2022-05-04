@@ -13,6 +13,10 @@ class TodayViewController: CommonViewController {
     
     @IBOutlet weak var newsListTableview: UITableView!
     
+    var article: ArticleEntity?
+    
+    var selectedCategory: String?
+    
     /// NewsList.Article array whcih is filtered by the searched words.
     var filteredList = [ArticleEntity]()
     
@@ -48,6 +52,12 @@ class TodayViewController: CommonViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationItem.title = selectedCategory
+    }
+    
     
     /// called right after the view load to memory
     override func viewDidLoad() {
@@ -55,13 +65,26 @@ class TodayViewController: CommonViewController {
         
         articleController.delegate = self
         
-        // fetch NewsList
         fetchNews(endPoint: EndPoint.everything.rawValue,
                   keyWord: "today",
                   category: nil) {
             DispatchQueue.main.async {
                 self.newsListTableview.reloadData()
             }
+        }
+        
+        // TODO: Category별 다른 뉴스 fetch할 것
+        switch CommonDataManager.shared.newsCategoryList {
+        case ["Business"]:
+            fetchNews(endPoint: EndPoint.topHeadlines.rawValue,
+                      keyWord: nil,
+                      category: "business") {
+                DispatchQueue.main.async {
+                    self.newsListTableview.reloadData()
+                }
+            }
+        default:
+            break
         }
         
         do {
@@ -120,7 +143,7 @@ extension TodayViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodayNewsTableViewCell") as! TodayNewsTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodayNewsTableViewCell", for: indexPath) as! TodayNewsTableViewCell
         
         var article: ArticleEntity
         

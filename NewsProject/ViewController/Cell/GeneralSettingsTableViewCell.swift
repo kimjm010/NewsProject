@@ -9,11 +9,6 @@ import UIKit
 
 class GeneralSettingsTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var settingLabel: UILabel!
-    
-    
-    
-    
 }
 
 

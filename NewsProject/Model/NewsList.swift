@@ -25,14 +25,15 @@ struct NewsList: Codable {
         let urlToImage: String?
         let publishedAt: Date
         let content: String?
+        let isMarked: Bool = false
     }
     
     let articles: [Article]
+    
 }
 
 
 enum EndPoint: String, CaseIterable {
-    case everything
+    case everything = "everything"
     case topHeadlines = "top-headlines"
 }
-
