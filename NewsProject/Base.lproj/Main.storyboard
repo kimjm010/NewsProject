@@ -460,7 +460,7 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="TFU-e1-JEe">
                                                     <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -821,6 +821,9 @@
                                                                     <datePicker contentMode="scaleToFill" horizontalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="right" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="Cyc-9v-Bb6">
                                                                         <rect key="frame" x="58" y="41.5" width="258" height="50"/>
                                                                         <locale key="locale" localeIdentifier="en_US"/>
+                                                                        <connections>
+                                                                            <action selector="selectDate:" destination="xEe-Kk-7E9" eventType="valueChanged" id="G2R-YA-vOi"/>
+                                                                        </connections>
                                                                     </datePicker>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ySS-4m-WDw">
                                                                         <rect key="frame" x="324" y="41.5" width="50" height="50"/>
@@ -847,7 +850,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="28"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                                                 <connections>
                                                                                     <outlet property="delegate" destination="xEe-Kk-7E9" id="67Q-Em-dqf"/>
                                                                                 </connections>
@@ -856,7 +859,7 @@
                                                                                 <rect key="frame" x="0.0" y="36" width="374" height="28"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
                                                                                 <connections>
                                                                                     <outlet property="delegate" destination="xEe-Kk-7E9" id="4nr-cU-bwu"/>
                                                                                 </connections>
@@ -865,7 +868,7 @@
                                                                                 <rect key="frame" x="0.0" y="72" width="374" height="28"/>
                                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation"/>
+                                                                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="done"/>
                                                                                 <connections>
                                                                                     <outlet property="delegate" destination="xEe-Kk-7E9" id="efS-j5-PWB"/>
                                                                                 </connections>
@@ -1238,7 +1241,7 @@
         <!--Main View Controller-->
         <scene sceneID="3jv-aX-d5h">
             <objects>
-                <tabBarController storyboardIdentifier="MainViewController" id="qVi-GC-pVg" customClass="MainViewController" customModule="NewsProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainViewController" id="qVi-GC-pVg" customClass="MainViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="pxU-ua-cY9"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VpT-UG-Y5h">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

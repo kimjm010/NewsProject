@@ -147,5 +147,6 @@ extension UIViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let mainVC = storyBoard.instantiateViewController(withIdentifier: "MainViewController")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(mainVC)
+        //self.present(mainVC, animated: true, completion: nil)
     }
 }

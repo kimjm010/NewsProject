@@ -13,7 +13,7 @@ import AuthenticationServices
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
@@ -21,11 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             switch credentialState {
             case .authorized:
                 print("해당 ID는 연동되어있습니다.")
+                self.window?.rootViewController?.showMainVC()
                 break
             case .revoked, .notFound:
-                DispatchQueue.main.async {
-                    print("해당 ID는 연되되어있지 않습니다 또는 찾을 수 없습니다.")
-                }
+                print("해당 ID는 연되되어있지 않습니다 또는 찾을 수 없습니다.")
             default:
                 break
             }
@@ -39,15 +38,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         // Called when a new scene session is being created.
         // Use this method to select a configuration to create the new scene with.
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.

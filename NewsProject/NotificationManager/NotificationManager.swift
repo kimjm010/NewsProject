@@ -60,12 +60,19 @@ class NotificationManager {
             
 
             trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: isReminder)
-            print(#function, "등록되었습니다.")
+            
+            #if DEBUG
+            print(#function, "타임 등록돼었습니다.")
+            #endif
         case 1:
             guard let date = date else { return }
             
             let dateComponents = Calendar.current.dateComponents([.day, .month, .year, .hour, .minute], from: date)
             trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isReminder)
+            
+            #if DEBUG
+            print(#function, "캘린더 등록돼었습니다.")
+            #endif
         case 2:
             guard let latitude = latitude,
                   let longitude = longitude,
@@ -74,6 +81,10 @@ class NotificationManager {
             let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             let region = CLCircularRegion(center: center, radius: radius, identifier: id)
             trigger = UNLocationNotificationTrigger(region: region, repeats: isReminder)
+            
+            #if DEBUG
+            print(#function, "로케이션 등록돼었습니다.")
+            #endif
         default:
             break
         }
@@ -86,6 +97,8 @@ class NotificationManager {
                 }
             }
         }
+        
+        completion?()
     }
     
     
@@ -111,8 +124,6 @@ class NotificationManager {
             let center = CLLocationCoordinate2D(latitude: lat, longitude: lon)
             let region = CLCircularRegion(center: center, radius: radius, identifier: user.name)
             trigger = UNLocationNotificationTrigger(region: region, repeats: user.isReminder)
-        default:
-            break
         }
         
         if let trigger = trigger {
@@ -130,9 +141,7 @@ class NotificationManager {
     }
     
     
-    
     func removeScheduleNotification(user: User) {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [user.name])
     }
-    
 }
