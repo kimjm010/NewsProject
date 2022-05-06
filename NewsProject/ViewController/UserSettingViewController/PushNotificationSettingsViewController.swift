@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 
 class PushNotificationSettingsViewController: CommonViewController {
@@ -35,6 +36,8 @@ class PushNotificationSettingsViewController: CommonViewController {
     @IBOutlet weak var repeatSwitch: UISwitch!
     
     @IBOutlet weak var timeIntervalLabel: UILabel!
+    
+    var locationManager: CLLocationManager?
     
     var selectedTimeInterval: Double?
     
@@ -95,8 +98,6 @@ class PushNotificationSettingsViewController: CommonViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
-       
     }
     
     
@@ -111,8 +112,6 @@ class PushNotificationSettingsViewController: CommonViewController {
     }
     
     
-    
-    
     @IBAction func toggleReminderType(_ sender: Any) {
         let currentIndex = reminderTypeSegmentedControl.selectedSegmentIndex
         
@@ -121,14 +120,19 @@ class PushNotificationSettingsViewController: CommonViewController {
         UserDefaults.standard.set(currentIndex, forKey: "reminderType")
     }
     
+    
     @IBAction func toggleRepeats(_ sender: Any) {
         UserDefaults.standard.set(repeatSwitch.isOn, forKey: "repeatNoti")
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialSetting()
+        
+        locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyHundredMeters
         
         let token = NotificationCenter.default.addObserver(forName: .sendSelectedTimeInterval,
                                                        object: nil,
@@ -161,12 +165,12 @@ class PushNotificationSettingsViewController: CommonViewController {
             timeIntervalView.isHidden = true
             dateView.isHidden = timeIntervalView.isHidden
             
-            LocationManager.shared.requestAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
+            
         default:
             break
         }
     }
-    
     
     
     func initialSetting() {
@@ -210,12 +214,48 @@ extension PushNotificationSettingsViewController: UITextFieldDelegate {
     }
     
     
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         guard let text = textField.text,
               let _ = Double(text) else { return false }
         
         return true
+    }
+}
+
+
+
+
+extension PushNotificationSettingsViewController: CLLocationManagerDelegate {
+    
+    func updateLocation() {
+        locationManager?.startUpdatingLocation()
+    }
+    
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse, .authorizedAlways:
+            updateLocation()
+        case .notDetermined:
+            locationManager?.requestWhenInUseAuthorization()
+        case .denied, .restricted:
+            alertGoToSetting(title: "Alert", message: "Do you want to allow NewsProject to access your location?") { _ in
+                let settingUrlStr = UIApplication.openSettingsURLString
+                if let settingUrl = URL(string: settingUrlStr) {
+                    if UIApplication.shared.canOpenURL(settingUrl) {
+                        UIApplication.shared.open(settingUrl, options: [:], completionHandler: nil)
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        manager.stopUpdatingLocation()
     }
 }

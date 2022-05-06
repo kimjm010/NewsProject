@@ -36,8 +36,6 @@
 		F5EF581C281904BB00526088 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF581B281904BB00526088 /* LoginViewController.swift */; };
 		F5EF5845281DD5B900526088 /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF5844281DD5B900526088 /* FavoriteTableViewCell.swift */; };
 		F5EF58492821B23F00526088 /* KeychainItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF58482821B23F00526088 /* KeychainItem.swift */; };
-		F5EF584C2823183D00526088 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF584B2823183D00526088 /* LocationManager.swift */; };
-		F5EF584E282321A600526088 /* UIViewController+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF584D282321A600526088 /* UIViewController+UIButton.swift */; };
 		F663E5357F69CD98E0918FD0 /* Pods_NewsProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1920F0BE3FAE6C6E3E6A128F /* Pods_NewsProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,8 +75,6 @@
 		F5EF5842281DCA7A00526088 /* NewsProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NewsProject.entitlements; sourceTree = "<group>"; };
 		F5EF5844281DD5B900526088 /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		F5EF58482821B23F00526088 /* KeychainItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItem.swift; sourceTree = "<group>"; };
-		F5EF584B2823183D00526088 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		F5EF584D282321A600526088 /* UIViewController+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+UIButton.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,7 +198,6 @@
 				F5C771B527FC2410005B3C37 /* Date+Formatter.swift */,
 				F5BD28462803E0D900935FDB /* UIViewController+Alert.swift */,
 				F5BD2848280545CD00935FDB /* NSNotification+Extension.swift */,
-				F5EF584D282321A600526088 /* UIViewController+UIButton.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -235,7 +230,6 @@
 		F5EF584A2823182F00526088 /* LocationManager */ = {
 			isa = PBXGroup;
 			children = (
-				F5EF584B2823183D00526088 /* LocationManager.swift */,
 			);
 			path = LocationManager;
 			sourceTree = "<group>";
@@ -371,7 +365,6 @@
 				F5C771AB27FC19CC005B3C37 /* GeneralSettingsViewController.swift in Sources */,
 				F5C771A527FC0EDB005B3C37 /* PushNotificationSettingsViewController.swift in Sources */,
 				F5E0F177280ABF3700EB332E /* NotificationManager.swift in Sources */,
-				F5EF584E282321A600526088 /* UIViewController+UIButton.swift in Sources */,
 				F5EF58492821B23F00526088 /* KeychainItem.swift in Sources */,
 				F5C771B027FC1CB0005B3C37 /* NewsDB.xcdatamodeld in Sources */,
 				F54BC47527F1A55D000DB490 /* SceneDelegate.swift in Sources */,
@@ -382,7 +375,6 @@
 				F5D5F1A727F3408400CD96C7 /* User.swift in Sources */,
 				F5BD2849280545CD00935FDB /* NSNotification+Extension.swift in Sources */,
 				F5EF581A281318EF00526088 /* CommonDataManager.swift in Sources */,
-				F5EF584C2823183D00526088 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

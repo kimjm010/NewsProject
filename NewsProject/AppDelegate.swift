@@ -17,14 +17,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: KeychainItem.currentUserIdentifier) { (credentialState, error) in
+        appleIDProvider.getCredentialState(forUserID: "userIdentifier") { (credentialState, error) in
             switch credentialState {
             case .authorized:
                 print("해당 ID는 연동되어있습니다.")
-                self.window?.rootViewController?.showMainVC()
                 break
             case .revoked, .notFound:
                 print("해당 ID는 연되되어있지 않습니다 또는 찾을 수 없습니다.")
+                // Load, Read
+                DispatchQueue.main.async {
+                    self.window?.rootViewController?.showLoginViewController()
+                }
             default:
                 break
             }

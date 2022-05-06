@@ -35,6 +35,9 @@ let generalSettingLists = ["Push Notification Settings", "DisplaySetting"]
 
 
 
+struct UserTemp {
+    let name: String
+}
 
 
 

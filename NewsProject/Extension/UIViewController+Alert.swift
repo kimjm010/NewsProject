@@ -38,7 +38,7 @@ extension UIViewController {
     func alertGoToSetting(title: String, message: String, okHandelr: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "Go", style: .default, handler: okHandelr)
+        let okAction = UIAlertAction(title: "Go Setting", style: .default, handler: okHandelr)
         alert.addAction(okAction)
         
         let laterAction = UIAlertAction(title: "Later", style: .cancel, handler: nil)
